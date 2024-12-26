@@ -24,6 +24,7 @@ public class Junit_Test {
     @Test
     @DisplayName("Test1 정상")
     public void test1(){
+        org.assertj.core.api.Assertions.assertThat(CarStatus.STOP).isEqualTo(CarStatus.STOP);
         Assertions.assertEquals(car1, car2);
         Assertions.assertNotNull(car2);
         Assertions.assertEquals(car1.getName(), car2.getName());

@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/hdauto.iml" filepath="$PROJECT_DIR$/hdauto.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jtest.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jtest.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jtest.test.iml" filepath="$PROJECT_DIR$/.idea/modules/jtest.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stest.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stest.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stest.test.iml" filepath="$PROJECT_DIR$/.idea/modules/stest.test.iml" />
     </modules>
   </component>
 </project>
