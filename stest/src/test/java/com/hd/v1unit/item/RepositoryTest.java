@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DisplayName("Item Repository Test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@ActiveProfiles("dev")
+@ActiveProfiles("h2db")
 public class RepositoryTest {
 
     @Autowired
