@@ -53,7 +53,7 @@ public class ControllerSaveTest {
                         .price(10000L)
                         .build();
         String body = objectMapper.writeValueAsString(requestDto);
-        // stub
+        // stub        when(itemRepository.save(any())).thenReturn(itemEntity);
         given(itemService.save(any())).willReturn(
                 ItemEntity.builder()
                 .id(100L)
