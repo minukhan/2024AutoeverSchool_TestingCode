@@ -21,6 +21,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
 @WebMvcTest(controllers = ItemController.class)
@@ -64,8 +66,20 @@ public class ControllerSaveTest {
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(body));
         // then
+        resultActions.andExpect(status().isOk());
+        resultActions.andExpect(jsonPath("$.data.id").value(100L));
+        resultActions.andExpect(jsonPath("$.data.name").value("p1"));
+        resultActions.andExpect(jsonPath("$.data.price").value(10000L));
         resultActions.andDo(print());
     }
+
+    // Validated Name
+
+
+    // Validated Price
+
+
+    // Duplicated Name Exception
 
 
 }
