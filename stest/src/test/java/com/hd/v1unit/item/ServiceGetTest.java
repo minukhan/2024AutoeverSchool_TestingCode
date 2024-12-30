@@ -47,16 +47,14 @@ class ServiceGetTest {
     @DisplayName("정상 케이스")
     void success1() {
         // give
-        ItemEntity itemEntity = ItemEntity.builder().name(name).price(price).build();
-        ItemEntity resultEntity = ItemEntity.builder().id(itemEntity.getId()).name(name).price(price).build();
-
+        ItemEntity resultEntity = ItemEntity.builder().id(1L).name(name).price(price).build();
+        long itemId = 1L;
         //stub
-        when(itemRepository.save(any(ItemEntity.class))).thenReturn(itemEntity);
-        when(itemRepository.findById(resultEntity.getId())).thenReturn(Optional.of(resultEntity));
+        when(itemRepository.findById(any())).thenReturn(Optional.of(resultEntity));
 
         // when
-        itemService.save(resultEntity);
-        ItemEntity result = itemService.get(itemEntity.getId());
+
+        ItemEntity result = itemService.get(itemId);
 
         //  verify
         assertThat(result.getId()).isEqualTo(resultEntity.getId());
