@@ -41,6 +41,9 @@ dependencies {
     // 5. H2DB
     runtimeOnly 'com.h2database:h2'
 
+    // 6. validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 
 
     // 1. Lombok Test
