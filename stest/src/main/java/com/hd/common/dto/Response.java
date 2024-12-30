@@ -22,7 +22,7 @@ public class Response {
     public static class Body {
         private int state;
         private String result;
-        private String massage;
+        private String message;
         private Object data;
         private Object error;
         private ErrorCode errorCode;
@@ -33,7 +33,7 @@ public class Response {
                 .state(status.value())
                 .data(data)
                 .result("success")
-                .massage(msg)
+                .message(msg)
                 .error(Collections.emptyList())
                 .build();
 
@@ -120,7 +120,7 @@ public class Response {
                 .state(status.value())
                 .data(data)
                 .result("fail")
-                .massage(msg)
+                .message(msg)
                 .error(Collections.emptyList())
                 .build();
         return ResponseEntity.ok(body);
@@ -180,7 +180,7 @@ public class Response {
                 .state(HttpStatus.BAD_REQUEST.value())
                 .data(Collections.emptyList())
                 .result("fail")
-                .massage("")
+                .message("")
                 .error(errors)
                 .build();
         return ResponseEntity.ok(body);

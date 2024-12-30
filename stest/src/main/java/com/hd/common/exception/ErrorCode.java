@@ -16,6 +16,8 @@ public enum ErrorCode {
     NAME_DUPLICATED("E701","NAME DUPLICATED"),
     ID_NOT_FOUND("E801","ID NOT FOUND"),
     DATA_DOSE_NOT_EXIST("E901","DATA DOSE NOT EXIST"),
+    NOT_EMPTY("E902","Not Empty Field"),
+    InValid_VALUE("E903","InValid Value"),
     ;
 
     private String errorCode;

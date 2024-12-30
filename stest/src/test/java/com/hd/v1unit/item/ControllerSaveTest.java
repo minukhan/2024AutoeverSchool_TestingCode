@@ -153,7 +153,7 @@ public class ControllerSaveTest {
         resultActions.andDo(print());
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$.state").value(500))
-                .andExpect(jsonPath("$.massage").value(ErrorCode.NAME_DUPLICATED.getErrorMessage()))
+                .andExpect(jsonPath("$.message").value(ErrorCode.NAME_DUPLICATED.getErrorMessage()))
                 .andExpect(jsonPath("$.data.errorCode").value(ErrorCode.NAME_DUPLICATED.getErrorCode()));
     }
 
