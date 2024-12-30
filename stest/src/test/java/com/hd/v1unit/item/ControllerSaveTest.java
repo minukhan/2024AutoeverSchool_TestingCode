@@ -2,6 +2,8 @@ package com.hd.v1unit.item;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hd.common.exception.ErrorCode;
+import com.hd.common.exception.NameDuplicateException;
 import com.hd.v1.item.controller.ItemController;
 import com.hd.v1.item.dto.ItemRequestDto;
 import com.hd.v1.item.entity.ItemEntity;
@@ -74,12 +76,85 @@ public class ControllerSaveTest {
     }
 
     // Validated Name
-
+    @Test
+    @Order(2)
+    @DisplayName("Validated Name Test")
+    public void test2() throws Exception {
+        String name = null;
+        // given
+        ItemRequestDto requestDto =
+                ItemRequestDto.builder()
+                        .name(name)
+                        .price(10000L)
+                        .build();
+        String body = objectMapper.writeValueAsString(requestDto);
+        // when
+        ResultActions resultActions =
+                mockMvc.perform(post("/api/item/add")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(body));
+        // then
+        resultActions.andDo(print());
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.state").value(400))
+                .andExpect(jsonPath("$.error.[0].field").value("name"))
+                .andExpect(jsonPath("$.error.[0].message").value("Name cannot be empty"));
+    }
 
     // Validated Price
-
+    @Test
+    @Order(3)
+    @DisplayName("Validated Price Test")
+    public void test3() throws Exception {
+        Long price = 1L;
+        // given
+        ItemRequestDto requestDto =
+                ItemRequestDto.builder()
+                        .name("p1")
+                        .price(price)
+                        .build();
+        String body = objectMapper.writeValueAsString(requestDto);
+        // when
+        ResultActions resultActions =
+                mockMvc.perform(post("/api/item/add")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(body));
+        // then
+        resultActions.andDo(print());
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.state").value(400))
+                .andExpect(jsonPath("$.error.[0].field").value("price"))
+                .andExpect(jsonPath("$.error.[0].message").value("10이상이어야함"));
+    }
 
     // Duplicated Name Exception
-
+    @Test
+    @Order(4)
+    @DisplayName("Duplicated Name Test")
+    public void test4() throws Exception {
+        //given
+        ItemRequestDto requestDto =
+                ItemRequestDto.builder()
+                        .name("p1")
+                        .price(10000L)
+                        .build();
+        String body = objectMapper.writeValueAsString(requestDto);
+        // stub
+        given(itemService.save(any())).willThrow(
+            new NameDuplicateException(ErrorCode.NAME_DUPLICATED.getErrorMessage(),
+                    ErrorCode.NAME_DUPLICATED)
+        );
+        // when
+        ResultActions resultActions =
+                mockMvc.perform(post("/api/item/add")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(body));
+        // then
+        resultActions.andDo(print());
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.state").value(500))
+                .andExpect(jsonPath("$.massage").value(ErrorCode.NAME_DUPLICATED.getErrorMessage()))
+                .andExpect(jsonPath("$.data.errorCode").value(ErrorCode.NAME_DUPLICATED.getErrorCode()));
+    }
 
 }
